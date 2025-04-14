@@ -3,9 +3,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Step 1: Load the dataset
+#  Load the dataset
 df = pd.read_csv('covid_19_data.csv')  
-# Step 2: Clean the data
+#  Clean the data
 df = df.rename(columns={
     'ObservationDate': 'Date',
     'Country/Region': 'Country',
@@ -22,13 +22,13 @@ df['Date'] = pd.to_datetime(df['Date'])
 df['State'] = df['State'].fillna('Unknown')
 df[['Confirmed', 'Deaths', 'Recovered']] = df[['Confirmed', 'Deaths', 'Recovered']].fillna(0)
 
-# Step 3: Total confirmed cases by country
+# Total confirmed cases by country
 total_cases = df.groupby('Country')['Confirmed'].max().sort_values(ascending=False)
 
 print("Top 5 Countries by Confirmed Cases:")
 print(total_cases.head(10))
 
-# Step 4: Bar plot for top 5 countries
+#  Bar plot for top 5 countries
 top_5 = total_cases.head(5)
 top_5.plot(kind='bar', color='skyblue')
 plt.title('Top 5 Countries by Confirmed COVID-19 Cases')
@@ -38,7 +38,7 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
-# Step 5: Trend analysis for a specific country (e.g., India)
+#  Trend analysis for a specific country (e.g., India)
 country = 'India'  
 country_data = df[df['Country'] == country]
 
